@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aceptación del servicio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <span class="topbar__logo" aria-hidden="true">✔</span>
+      <span class="topbar__title">Portal de aceptación de servicios</span>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Pantalla de error (token ausente) -->
+    <section id="errorScreen" class="card state" hidden>
+      <div class="state__icon">⚠️</div>
+      <h2>Enlace no válido</h2>
+      <p>No pudimos identificar su reporte. Por favor abra el enlace completo que recibió por correo o contacte a su asesor.</p>
+    </section>
+
+    <!-- Pantalla de éxito -->
+    <section id="successScreen" class="card state" hidden>
+      <div class="state__icon">✅</div>
+      <h2>Gracias por su aceptación.</h2>
+      <p>Su comprobante será enviado al correo registrado.</p>
+    </section>
+
+    <!-- Formulario principal -->
+    <form id="signForm" class="card" novalidate>
+
+      <div class="card__head">
+        <h1>ACEPTACIÓN DEL SERVICIO</h1>
+        <div class="meta">
+          <div class="meta__item"><span>REPORTE</span><strong id="reportNumber">#001</strong></div>
+          <div class="meta__item"><span>CASO</span><strong id="caseId">COI-0105-PBH001-BH001</strong></div>
+        </div>
+      </div>
+
+      <!-- Datos del cliente -->
+      <section class="section">
+        <h2 class="section__title">Datos del cliente</h2>
+
+        <div class="field">
+          <label for="nombre">Nombre del titular o representante <b class="req">*</b></label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" maxlength="120">
+          <small class="field__error" data-error-for="nombre"></small>
+        </div>
+
+        <div class="field">
+          <label for="correo">Correo para recepción del comprobante <b class="req">*</b></label>
+          <input type="email" id="correo" name="correo" autocomplete="email" inputmode="email" maxlength="150">
+          <small class="field__error" data-error-for="correo"></small>
+        </div>
+      </section>
+
+      <!-- Encuesta de satisfacción -->
+      <section class="section">
+        <h2 class="section__title">Encuesta de satisfacción</h2>
+
+        <!-- Estrellas: se declaran de 5 a 1 y se invierten con CSS (row-reverse)
+             para poder resaltar con selectores hermanos sin JavaScript. -->
+        <fieldset class="question" data-key="amabilidad">
+          <legend><span class="question__num">1.</span> ¿Cómo califica la amabilidad, cordialidad y empatía del técnico que lo atendió?</legend>
+          <div class="stars">
+            <input type="radio" id="amabilidad5" name="amabilidad" value="5"><label for="amabilidad5" title="5 estrellas">★</label>
+            <input type="radio" id="amabilidad4" name="amabilidad" value="4"><label for="amabilidad4" title="4 estrellas">★</label>
+            <input type="radio" id="amabilidad3" name="amabilidad" value="3"><label for="amabilidad3" title="3 estrellas">★</label>
+            <input type="radio" id="amabilidad2" name="amabilidad" value="2"><label for="amabilidad2" title="2 estrellas">★</label>
+            <input type="radio" id="amabilidad1" name="amabilidad" value="1"><label for="amabilidad1" title="1 estrella">★</label>
+          </div>
+          <div class="rating-desc" aria-live="polite">
+            <span data-value="1">Requiere mejoras</span>
+            <span data-value="2">Aceptable</span>
+            <span data-value="3">Satisfactorio</span>
+            <span data-value="4">Muy bueno</span>
+            <span data-value="5">Excelente</span>
+          </div>
+          <small class="field__error" data-error-for="amabilidad"></small>
+        </fieldset>
+
+        <fieldset class="question" data-key="tiempo">
+          <legend><span class="question__num">2.</span> ¿Cómo evalúa los tiempos de respuesta y/o de resolución a su requerimiento?</legend>
+          <div class="stars">
+            <input type="radio" id="tiempo5" name="tiempo" value="5"><label for="tiempo5" title="5 estrellas">★</label>
+            <input type="radio" id="tiempo4" name="tiempo" value="4"><label for="tiempo4" title="4 estrellas">★</label>
+            <input type="radio" id="tiempo3" name="tiempo" value="3"><label for="tiempo3" title="3 estrellas">★</label>
+            <input type="radio" id="tiempo2" name="tiempo" value="2"><label for="tiempo2" title="2 estrellas">★</label>
+            <input type="radio" id="tiempo1" name="tiempo" value="1"><label for="tiempo1" title="1 estrella">★</label>
+          </div>
+          <div class="rating-desc" aria-live="polite">
+            <span data-value="1">Requiere mejoras</span>
+            <span data-value="2">Aceptable</span>
+            <span data-value="3">Satisfactorio</span>
+            <span data-value="4">Muy bueno</span>
+            <span data-value="5">Excelente</span>
+          </div>
+          <small class="field__error" data-error-for="tiempo"></small>
+        </fieldset>
+
+        <fieldset class="question" data-key="actitud">
+          <legend><span class="question__num">3.</span> ¿Cómo considera que fue la actitud y disposición del técnico/ingeniero?</legend>
+          <div class="stars">
+            <input type="radio" id="actitud5" name="actitud" value="5"><label for="actitud5" title="5 estrellas">★</label>
+            <input type="radio" id="actitud4" name="actitud" value="4"><label for="actitud4" title="4 estrellas">★</label>
+            <input type="radio" id="actitud3" name="actitud" value="3"><label for="actitud3" title="3 estrellas">★</label>
+            <input type="radio" id="actitud2" name="actitud" value="2"><label for="actitud2" title="2 estrellas">★</label>
+            <input type="radio" id="actitud1" name="actitud" value="1"><label for="actitud1" title="1 estrella">★</label>
+          </div>
+          <div class="rating-desc" aria-live="polite">
+            <span data-value="1">Requiere mejoras</span>
+            <span data-value="2">Aceptable</span>
+            <span data-value="3">Satisfactorio</span>
+            <span data-value="4">Muy bueno</span>
+            <span data-value="5">Excelente</span>
+          </div>
+          <small class="field__error" data-error-for="actitud"></small>
+        </fieldset>
+
+        <fieldset class="question" data-key="calidad">
+          <legend><span class="question__num">4.</span> ¿Cómo evalúa la calidad del servicio (efectividad de la solución, conocimiento del técnico/ingeniero asignado)?</legend>
+          <div class="stars">
+            <input type="radio" id="calidad5" name="calidad" value="5"><label for="calidad5" title="5 estrellas">★</label>
+            <input type="radio" id="calidad4" name="calidad" value="4"><label for="calidad4" title="4 estrellas">★</label>
+            <input type="radio" id="calidad3" name="calidad" value="3"><label for="calidad3" title="3 estrellas">★</label>
+            <input type="radio" id="calidad2" name="calidad" value="2"><label for="calidad2" title="2 estrellas">★</label>
+            <input type="radio" id="calidad1" name="calidad" value="1"><label for="calidad1" title="1 estrella">★</label>
+          </div>
+          <div class="rating-desc" aria-live="polite">
+            <span data-value="1">Requiere mejoras</span>
+            <span data-value="2">Aceptable</span>
+            <span data-value="3">Satisfactorio</span>
+            <span data-value="4">Muy bueno</span>
+            <span data-value="5">Excelente</span>
+          </div>
+          <small class="field__error" data-error-for="calidad"></small>
+        </fieldset>
+      </section>
+
+      <!-- Firma -->
+      <section class="section">
+        <h2 class="section__title">Firma del Cliente o Representante</h2>
+        <div class="signature" id="signatureWrap">
+          <canvas id="signatureCanvas" aria-label="Área de firma"></canvas>
+          <span class="signature__hint" id="signatureHint">Firme aquí con el mouse o con el dedo</span>
+        </div>
+        <div class="signature__actions">
+          <small class="field__error" data-error-for="firma"></small>
+          <button type="button" id="clearBtn" class="btn btn--ghost">Limpiar firma</button>
+        </div>
+      </section>
+
+      <!-- Mensaje general de error de envío -->
+      <div id="formAlert" class="alert" role="alert" hidden></div>
+
+      <button type="submit" id="submitBtn" class="btn btn--primary">
+        <span class="btn__label">Firmar y Enviar</span>
+        <span class="btn__spinner" aria-hidden="true"></span>
+      </button>
+    </form>
+  </main>
+
+  <footer class="footer">Su información se utiliza únicamente para la emisión del comprobante de este servicio.</footer>
+
+  <!-- SignaturePad.js (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/4.1.7/signature_pad.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
